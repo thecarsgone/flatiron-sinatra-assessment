@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
 #<input id="hidden" type="hidden" name="_method" value="patch/delete">
   use Rack::Flash
   configure do
-    set :public_folder, 'public'
+    set :public_folder, Proc.new { File.join(root, "../public/") }
     set :views, 'app/views'
     #enable sessions here
 		enable :sessions
@@ -50,6 +50,7 @@ class ApplicationController < Sinatra::Base
     erb :'users/user_create'
   end
 
+<<<<<<< HEAD
   post '/' do
     @user = User.find_by(username:params[:username])
     if @user && @user.authenticate(params[:password])
@@ -59,19 +60,28 @@ class ApplicationController < Sinatra::Base
     else
       flash[:messsae] = "Log in failed."
       redirect '/login'
-    end
-  end
-  
-  post '/signup' do
-    if !params[:password].empty? && !params[:username].empty?
-      @user = User.create(username:params[:username],password:params[:password])
-      @user.save
-      flash[:message] = "Successfully created user."
-      redirect '/login'
-    else
-      flash[:message] = "Nothing should be blank."
-      redirect '/signup'
-    end
-  end
+# =======
+#   post '/signup' do
+#     User.create(username:params[:username],password:params[:password])
+#     flash[:message] = "Successfully created user."
+#     redirect '/login' do
+# >>>>>>> 1b7aaa03bf0561f6e173d36108677a04e4828572
+#     end
+#   end
+
+  # #possible conflicting thing below
+  #   post '/signup' do
+  #     if !params[:password].empty? && !params[:username].empty?
+  #       @user = User.create(username:params[:username],password:params[:password])
+  #       @user.save
+  #       flash[:message] = "Successfully created user."
+  #       redirect '/login'
+  #     else
+  #       flash[:message] = "Nothing should be blank."
+  #       redirect '/signup'
+  #     end
+  #   end
+
+
 
 end

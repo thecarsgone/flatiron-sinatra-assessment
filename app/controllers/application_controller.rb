@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
 #<input id="hidden" type="hidden" name="_method" value="patch/delete">
   use Rack::Flash
   configure do
-    set :public_folder, 'public'
+    set :public_folder, Proc.new { File.join(root, "../public/") }
     set :views, 'app/views'
     #enable sessions here
 		enable :sessions
@@ -24,7 +24,7 @@ class ApplicationController < Sinatra::Base
   get '/signup' do
     erb :'users/user_create'
   end
-  
+
   post '/signup' do
     User.create(username:params[:username],password:params[:password])
     flash[:message] = "Successfully created user."

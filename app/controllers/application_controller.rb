@@ -62,5 +62,19 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  # #possible conflicting thing below
+  #   post '/signup' do
+  #     if !params[:password].empty? && !params[:username].empty?
+  #       @user = User.create(username:params[:username],password:params[:password])
+  #       @user.save
+  #       flash[:message] = "Successfully created user."
+  #       redirect '/login'
+  #     else
+  #       flash[:message] = "Nothing should be blank."
+  #       redirect '/signup'
+  #     end
+  #   end
+
+
 
 end

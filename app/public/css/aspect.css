@@ -1,5 +1,10 @@
 #show_container {
   position: absolute;
+  margin: auto;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
 }
 
 #show_container img {
@@ -7,4 +12,10 @@
    position: absolute;               /* 2 */
    top: 50%;                         /* 3 */
    transform: translate(0, -50%);
+   z-index: 100;
    }   /* 4 */
+
+.black_square {
+  background-color: black;
+  position: relative;
+}

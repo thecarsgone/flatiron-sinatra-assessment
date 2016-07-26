@@ -8,7 +8,6 @@ class PictureController < ApplicationController
     ##TODO: get user id from session
     #make a new folder in public/images for each user
 
-
     # form returns 2 major params -- the uploaded file and the chosen ratio.
     # First, the filename is slugified for easier access
     params['myfile'][:filename] = slugify(params['myfile'][:filename])

@@ -1,0 +1,14 @@
+#main_image{
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#upper_bar{
+    position: fixed;
+    top: 0px;
+    height: 30%;
+    width: 100%;
+    background-color: black;
+    z-index: 10;
+}

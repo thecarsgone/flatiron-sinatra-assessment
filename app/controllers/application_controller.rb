@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
 #<input id="hidden" type="hidden" name="_method" value="patch/delete">
   use Rack::Flash
   configure do
-    set :public_folder, 'public'
+    set :public_folder, Proc.new { File.join(root, "../public/") }
     set :views, 'app/views'
     #enable sessions here
 		enable :sessions
@@ -61,17 +61,6 @@ class ApplicationController < Sinatra::Base
       redirect '/login'
     end
   end
-  
-  post '/signup' do
-    if !params[:password].empty? && !params[:username].empty?
-      @user = User.create(username:params[:username],password:params[:password])
-      @user.save
-      flash[:message] = "Successfully created user."
-      redirect '/login'
-    else
-      flash[:message] = "Nothing should be blank."
-      redirect '/signup'
-    end
-  end
+
 
 end

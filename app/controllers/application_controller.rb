@@ -27,7 +27,8 @@ class ApplicationController < Sinatra::Base
 
   #main controller action
   get '/' do
-    erb :'login'
+    redirect '/index' if logged_in?
+    redirect '/login'
   end
 
   get '/index' do
@@ -35,10 +36,17 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
+    redirect '/index' if logged_in?
     erb :login
   end
 
+  get '/logout' do
+    session.clear
+    redirect '/login'
+  end
+
   get '/signup' do
+    redirect '/index' if logged_in?
     erb :'users/user_create'
   end
 
@@ -46,6 +54,7 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(username:params[:username])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
+      binding.pry
       flash[:messsae] = "Successfully logged in."
       redirect '/index'
     else
@@ -55,11 +64,14 @@ class ApplicationController < Sinatra::Base
   end
   
   post '/signup' do
-    redirect '/index' if logged_in?
-    if !params[:password].empty? && params[:username].empty?
-      User.create(username:params[:username],password:params[:password]).save
+    if !params[:password].empty? && !params[:username].empty?
+      @user = User.create(username:params[:username],password:params[:password])
+      @user.save
       flash[:message] = "Successfully created user."
       redirect '/login'
+    else
+      flash[:message] = "Nothing should be blank."
+      redirect '/signup'
     end
   end
 

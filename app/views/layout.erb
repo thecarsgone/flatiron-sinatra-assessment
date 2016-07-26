@@ -4,6 +4,17 @@
   <title>Hello World!</title>
 </head>
   <body>
+    <h2 class="offscreen">Pic dump</h2> 
+    <div id="hmenu"> 
+    <ul> 
+      <li><a href="/index">Home</a></li> 
+      <% if session[:id].nil? %>
+      <li><a href="/login"><%= "Log In" %></a></li> 
+      <% else %>
+      <li><a href="/logout"><%= "Log Out" %></a></li> 
+      <% end %>
+    </ul>   
+    </div> 
     <%= yield %>
   </body>
 </html>

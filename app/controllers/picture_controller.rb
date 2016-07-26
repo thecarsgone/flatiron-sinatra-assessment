@@ -1,6 +1,7 @@
 class PictureController < ApplicationController
 
   get '/pictures/new' do
+    redirect '/login' unless logged_in?
     erb :'pictures/picture_create'
   end
 

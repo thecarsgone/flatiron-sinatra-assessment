@@ -4,5 +4,5 @@
 <h1>Welcome to <%= @user.username %> </h1>
 <h2>Your Pictures:</h2>
 <% @user.pictures.each do |x| %>
-  <h4><a href="/picture/<%=x.id%>"><%= x.name %></a></h4>
+  <h4><a href="/pictures/<%=x.id%>"><%= x.name %></a></h4>
 <% end %>

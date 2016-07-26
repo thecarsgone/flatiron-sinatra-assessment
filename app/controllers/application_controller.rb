@@ -32,6 +32,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/index' do
+    redirect '/login' unless logged_in?
     erb :index
   end
 
@@ -66,6 +67,13 @@ class ApplicationController < Sinatra::Base
     if !params[:password].empty? && !params[:username].empty?
       @user = User.create(username:params[:username],password:params[:password])
       @user.save
+      directory_name = Dir.pwd + "/app/public/images/user_#{@user.id}"
+      unless File.exists?(directory_name)  
+        Dir.mkdir(directory_name) 
+      else 
+        redirect '/signup'
+      end
+
       flash[:message] = "Successfully created user."
       redirect '/login'
     else

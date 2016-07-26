@@ -50,6 +50,7 @@ class ApplicationController < Sinatra::Base
     erb :'users/user_create'
   end
 
+<<<<<<< HEAD
   post '/' do
     @user = User.find_by(username:params[:username])
     if @user && @user.authenticate(params[:password])
@@ -59,8 +60,14 @@ class ApplicationController < Sinatra::Base
     else
       flash[:messsae] = "Log in failed."
       redirect '/login'
-    end
-  end
+# =======
+#   post '/signup' do
+#     User.create(username:params[:username],password:params[:password])
+#     flash[:message] = "Successfully created user."
+#     redirect '/login' do
+# >>>>>>> 1b7aaa03bf0561f6e173d36108677a04e4828572
+#     end
+#   end
 
   # #possible conflicting thing below
   #   post '/signup' do

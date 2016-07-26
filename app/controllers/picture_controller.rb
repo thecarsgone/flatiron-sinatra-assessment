@@ -5,6 +5,7 @@ class PictureController < ApplicationController
   end
 
   post '/pictures/new' do
+    binding.pry
     ##TODO: get user id from session
     #make a new folder in public/images for each user
 
@@ -22,12 +23,12 @@ class PictureController < ApplicationController
      @path = "/images/#{params['myfile'][:filename]}"
 
      #code below is used to determine the size of the boxes on either side of the pic
-     if !params["common"].empty?
-     ratio = params["common"].split(":").map{|x| x.to_f}
-     @box_proportion = (1 - (ratio[1]/ratio[0]))/2 * 100
+    #  if !params["common"].empty?
+    #  ratio = params["common"].split(":").map{|x| x.to_f}
+    #  @box_proportion = (1 - (ratio[1]/ratio[0]))/2 * 100
 
      redirect '/pictures/:id'
-   end
+  #  end
      #to determine bar size where x:y, you use the calculation (1 - (y / x))/2
      #will have to put an exception where y > x
   end

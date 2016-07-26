@@ -12,6 +12,7 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem "tux"
+gem 'fastimage'
 
 group :test do
   gem 'rspec'

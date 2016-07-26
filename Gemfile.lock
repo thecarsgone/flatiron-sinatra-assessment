@@ -34,6 +34,8 @@ GEM
     daemons (1.2.3)
     diff-lcs (1.2.5)
     eventmachine (1.2.0.1)
+    fastimage (2.0.0)
+      addressable (~> 2)
     i18n (0.7.0)
     method_source (0.8.2)
     mime-types (3.1)
@@ -114,6 +116,7 @@ DEPENDENCIES
   bcrypt
   capybara
   database_cleaner!
+  fastimage
   pry
   rack-flash3
   rack-test

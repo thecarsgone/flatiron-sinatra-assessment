@@ -5,7 +5,6 @@ class PictureController < ApplicationController
   end
 
   post '/pictures/new' do
-    binding.pry
     ##TODO: get user id from session
     #make a new folder in public/images for each user
 
@@ -21,16 +20,11 @@ class PictureController < ApplicationController
 
     #this path is used in HTML/ERB for display purposes
      @path = "/images/#{params['myfile'][:filename]}"
-
-     #code below is used to determine the size of the boxes on either side of the pic
-    #  if !params["common"].empty?
-    #  ratio = params["common"].split(":").map{|x| x.to_f}
-    #  @box_proportion = (1 - (ratio[1]/ratio[0]))/2 * 100
+     ratio = params["common"].split(":").map{|x| x.to_f}
+     @dimensions = proportional_crop(@path, ratio)
 
      redirect '/pictures/:id'
-  #  end
-     #to determine bar size where x:y, you use the calculation (1 - (y / x))/2
-     #will have to put an exception where y > x
+
   end
 
   get '/test' do
@@ -41,6 +35,12 @@ class PictureController < ApplicationController
 
   def slugify(string)
     string.gsub(" ", "-")
+  end
+
+  def proportional_crop(file_path, ratio)
+    current_dimensions = FastImage.size('app/public' + @path)
+    unit = current_dimensions[0] / ratio[0]
+    new_dimensions = [(ratio[0] * unit), (ratio[1] * unit)]
   end
 
 

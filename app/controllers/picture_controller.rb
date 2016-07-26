@@ -10,6 +10,7 @@ class PictureController < ApplicationController
     picture.upload(params['myfile'][:tempfile])
     params[:common].empty? ? picture.ratio = params[:ratio].join(":") : picture.ratio = params[:common]
     picture.save
+    binding.pry
     redirect "/pictures/#{picture.id}"
   end
 

@@ -5,7 +5,6 @@ class Picture < ActiveRecord::Base
     File.open("app/public/images/user_#{user_id}/" + name, "w") do |f|
       f.write(tempfile.read)
     end
-    path = "/images/user_#{user_id}/#{name}"
   end
 
   def self.slugify(string)
@@ -15,8 +14,10 @@ class Picture < ActiveRecord::Base
   def proportional_crop
     ratio = self.ratio.split(":").map{|x| x.to_f}
     current_dimensions = FastImage.size("app/public/images/user_#{user_id}/#{name}")
-    unit = current_dimensions[0] / ratio[0]
-    new_dimensions = [(ratio[0] * unit), (ratio[1] * unit)]
+    if ratio[0] < ratio[1]
+      new_dimensions = [((ratio[0]/ratio[1]) * current_dimensions[1]), current_dimensions[1]]
+    else new_dimensions = [current_dimensions[0], ((ratio[1]/ratio[0]) * current_dimensions[0])]
+    end
   end
 
 

@@ -17,7 +17,30 @@ class PictureController < ApplicationController
   get '/pictures/:id' do
     @picture = Picture.find(params[:id])
     @dimensions = @picture.proportional_crop
+    binding.pry
     erb :'pictures/show'
+  end
+
+  get '/pictures/:id/edit' do
+    @picture = Picture.find(params[:id])
+    @dimensions = @picture.proportional_crop
+    erb :'pictures/edit'
+  end
+
+  patch '/pictures/:id' do
+    picture = Picture.find(params[:id])
+    # if picture.user_id != current_user
+    #   redirect "/pictures/#{picture.id}"
+    # else
+    params[:ratio].all?{|x| x.to_i > 0} ? picture.update(ratio: params[:ratio].join(":")) : picture.update(ratio: params[:common])
+    binding.pry
+    redirect "/pictures/#{picture.id}"
+    # end
+  end
+
+  delete '/pictures/:id' do
+    Picture.find(params[:id]).delete
+    redirect '/index'
   end
 
 

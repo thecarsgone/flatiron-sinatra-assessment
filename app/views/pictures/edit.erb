@@ -1,0 +1,28 @@
+Change the ratio of this image:
+
+<div class="black_square" style="width:<%=@dimensions[0]%>px;height:<%=@dimensions[0]%>px;">
+<div id="show_container" style= "width:<%=@dimensions[0]%>px;height:<%=@dimensions[1]%>px;overflow:hidden;"><img src="/images/user_<%=@picture.user_id%>/<%=@picture.name%>">
+</div>
+</div>
+
+<form action="/pictures/<%=@picture.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label>Common aspect ratios</label> <br>
+  <input type="radio" name="common" value="16:9"> 16:9 (common HDMI) <br>
+ <input type="radio" name="common" value="4:3"> 4:3 (Instagram/old TV) <br>
+ <input type="radio" name="common" value="2.35:1"> 2.35:1 (widescreen) <br>
+ <input type="radio" name="common" value="9:16"> 9:16 (phone portrait mode) <br>
+ <input type="radio" name="common" value=""> (please detail below)<br>
+ <label>First ratio value (how proportionally wide you want your image to be)</label>
+ <input type="text" name="ratio[]" value=""><br>
+ <label>Second ratio value (how proportionally tall you want your image to be)</label>
+ <input type="text" name="ratio[]" value=""><br>
+<input type="submit" name="" value="submit">
+</form>
+
+Or delete your image:
+
+<form action="/pictures/<%=@picture.id%>" method="post">
+<input id="hidden" type="hidden" name="_method" value="delete">
+<input type="submit" name="" value="Delete this image">
+</form>

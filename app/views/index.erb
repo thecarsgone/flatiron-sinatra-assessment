@@ -2,6 +2,9 @@
   <%= flash[:message] %>
 <% end %>
 <h1>Welcome to <%= @user.username %> </h1>
+<form method="get" action="/pictures/new">
+    <button type="submit">New Picture</button>
+</form>
 <h2>Your Pictures:</h2>
 <% @user.pictures.each do |x| %>
   <h4><a href="/pictures/<%=x.id%>"><%= x.name %></a></h4>

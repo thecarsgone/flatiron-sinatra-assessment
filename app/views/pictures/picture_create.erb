@@ -1,21 +1,14 @@
 Create an aspect ratio
-<br> </br>
-<div id="container">
-    <div id="main_image"></div>
-    <div id="overlay_image"></div>
-</div>
-<br></br>
 
 <form action="/pictures/new" method="post" enctype="multipart/form-data">
-  <label>First, upload the gif you'd like to apply an aspect ratio to:</label>
+  <label>First, upload the picture you'd like to apply an aspect ratio to:</label>
   <input type="file" name="myfile" value="">
   <label>Common aspect ratios</label> <br>
   <input type="radio" name="common" value="16:9" checked> 16:9 (common HDMI) <br>
- <input type="radio" name="common" value="4:3"> 4:3 (old TV)
+ <input type="radio" name="common" value="4:3"> 4:3 (Instagram/old TV)
  <input type="radio" name="common" value="2.35:1"> 2.35:1 (widescreen)
  <input type="radio" name="common" value="9:16"> 9:16 (phone portrait mode)
-
- <input type="radio" name="common" value="other"> (please detail below)<br>
+ <input type="radio" name="common" value=""> (please detail below)<br>
  <label>First ratio value (how proportionally wide you want your image to be)</label>
  <input type="text" name="ratio[]" value=""><br>
  <label>Second ratio value (how proportionally tall you want your image to be)</label>

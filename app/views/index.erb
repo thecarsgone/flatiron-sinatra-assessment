@@ -1,7 +1,7 @@
 <% if flash.has?(:message) %>
   <%= flash[:message] %>
 <% end %>
-<h1>Welcome to <%= @user.username %> </h1>
+<h1>Welcome, <%= @user.username %> </h1>
 <form method="get" action="/pictures/new">
     <button type="submit">New Picture</button>
 </form>

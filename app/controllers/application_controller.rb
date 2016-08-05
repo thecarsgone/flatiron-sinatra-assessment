@@ -21,7 +21,11 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      User.find(session[:id])
+      if !@current_user
+        @current = User.find(session[:id])
+      else
+        @current_user
+      end
     end
   end
 
@@ -56,10 +60,10 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(username:params[:username])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
-      flash[:messsae] = "Successfully logged in."
+      flash[:messsage] = "Successfully logged in."
       redirect '/index'
     else
-      flash[:messsae] = "Log in failed."
+      flash[:messsage] = "Log in failed."
       redirect '/login'
     end
   end
@@ -70,9 +74,9 @@ class ApplicationController < Sinatra::Base
       @user.save
       #creates file here
       directory_name = Dir.pwd + "/app/public/images/user_#{@user.id}"
-      unless File.exists?(directory_name)  
-        Dir.mkdir(directory_name) 
-      else 
+      unless File.exists?(directory_name)
+        Dir.mkdir(directory_name)
+      else
         redirect '/signup'
       end
 

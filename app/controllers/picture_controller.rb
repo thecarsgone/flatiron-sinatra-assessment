@@ -7,6 +7,7 @@ class PictureController < ApplicationController
 
   post '/pictures/new' do
     user = current_user
+    ##save could be a validating method
     picture = Picture.create(name: Picture.slugify(params['myfile'][:filename]), user: user)
     picture.upload(params['myfile'][:tempfile])
     params[:ratio].all?{|x| x.to_i > 0} ? picture.ratio = params[:ratio].join(":") : picture.ratio = params[:common]
